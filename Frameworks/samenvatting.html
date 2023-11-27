@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>samenvatting.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="spring-rest">Spring (REST)</h1>
+<h2 id="projectstructuur">Projectstructuur</h2>
+<ul>
+<li>@EnableAutoConfiguration: enable Spring Boot's auto-configuration mechanism</li>
+<li>@ComponentScan: enable @Component scan on the package where the application is located</li>
+<li>@Configuration: allow to regiser extra beans in the context</li>
+<li><strong>@SpringBootApplication</strong>: gelijk aan de hierbovenstaande gecombineerd</li>
+</ul>
+<h2 id="dependency-injection">Dependency Injection</h2>
+<ul>
+<li><strong>@Autowired</strong></li>
+</ul>
+<h2 id="dao-klasse">DAO-klasse</h2>
+<ul>
+<li>Annoteren met <strong>@Service</strong></li>
+<li>HashMap aanmaken die het id op een object mapt</li>
+<li>Id's toewijzen aan objecten: static counter maken en initialiseren op een beginwaarde; telkens een object aangemaakt wordt --&gt; counter++</li>
+<li>Alle objecten teruggeven --&gt; lijst (of andere collectie) van map.values()</li>
+</ul>
+<h2 id="controller-klasse">Controller-klasse</h2>
+<ul>
+<li>Annoteren met <strong>@RestController</strong></li>
+<li>DAO-klasse hier als instantievariabele zetten en met <strong>@Autowired</strong> annoteren</li>
+</ul>
+<h3 id="get-request">GET-request</h3>
+<ul>
+<li><strong>@GetMapping(&quot;/naam&quot;)</strong></li>
+<li><strong>@GetMapping(&quot;/naam/{parameter})</strong></li>
+<li>Parameter oproepen in functie: public Returntype functieNaam(<strong>@PathVariable(&quot;parameter&quot;)</strong> type parameter)</li>
+</ul>
+<h3 id="post-request">POST-request</h3>
+<ul>
+<li><strong>@PostMapping(&quot;/naam&quot;)</strong></li>
+<li>bijhorende functie heeft als returntype ResponseEntity met type Void</li>
+<li><strong>@RequestBody(Object object)</strong> als parameter van de bijhorende functie</li>
+<li>URL teruggeven: <br> URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path(&quot;/{parameter}&quot;)<br>.buildAndExpand(functie_voor_parameter).toUri()</li>
+<li>return ResponseEntity.created(location).build();</li>
+</ul>
+<h3 id="delete-request">DELETE-request</h3>
+<ul>
+<li><strong>@DeleteMapping(&quot;/naam/{parameter}&quot;)</strong></li>
+<li><strong>@PathVariabele(&quot;parameter&quot;)</strong></li>
+</ul>
+<h3 id="put-request">PUT-request</h3>
+<ul>
+<li><strong>@PutMapping(&quot;/naam/{parameter}&quot;)</strong></li>
+<li><strong>@PathVariabele(&quot;parameter&quot;)</strong></li>
+</ul>
+<h3 id="http-code-teruggeven">HTTP-code teruggeven</h3>
+<ul>
+<li><strong>@ResponseStatus(HttpStatus.NAAM)</strong></li>
+</ul>
+<h3 id="exceptionhandler">ExceptionHandler</h3>
+<ul>
+<li><strong>@ResponseStatus(HttpStatus.NOT_FOUND)</strong> of een andere HTTP-code</li>
+<li><strong>@ExceptionHandler(ExceptieKlasse.class)</strong></li>
+</ul>
+<h1 id="spring-jpa">Spring (JPA)</h1>
+<h2 id="dependency">Dependency</h2>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</div></code></pre>
+<ul>
+<li>Om gegevens in XML te kunnen tonen</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.fasterxml.jackson.dataformat<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jackson-dataformat-xml<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</div></code></pre>
+<h2 id="actuator">Actuator</h2>
+<ul>
+<li>De 4 golden signals (volgens Google) kunnen hiermee gemonitord worden</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</div></code></pre>
+<ul>
+<li>Endpoints kiezen (via application.properties):
+management.endpoints.web.exposure.include=health,info,metrics</li>
+</ul>
+<h2 id="testen-api">Testen API</h2>
+<ul>
+<li>Web(Test)Client: <strong>@SpringBootTest</strong>-annotatie</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-webflux<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</div></code></pre>
+<ul>
+<li>Volledige annotatie:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@SpringBootTest</span>(webEnvironment = WebEnvironment.RANDOM_PORT)
+<span class="hljs-meta">@AutoConfigureWebTestClient</span>
+</div></code></pre>
+<ul>
+<li>Elke methode met @Test annoteren</li>
+<li>DependencyInjection van de WebTestClient om te communiceren met de REST API</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@LocalServerPort</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> port;
+
+<span class="hljs-meta">@Autowired</span>
+<span class="hljs-keyword">private</span> WebTestClient webClient;
+</div></code></pre>
+<ul>
+<li>Voorbeeld test om gegevens op te halen</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">haalBlogPostsOp</span><span class="hljs-params">()</span> </span>{
+    webClient.get()
+            .uri(<span class="hljs-string">"/posts"</span>)
+            .header(ACCEPT, APPLICATION_JSON_VALUE)
+            .exchange()
+            .expectStatus().isOk()
+            .expectHeader().contentType(APPLICATION_JSON)
+            .expectBodyList(BlogPost<span class="hljs-class">.<span class="hljs-keyword">class</span>).<span class="hljs-title">hasSize</span>(1)
+            .<span class="hljs-title">contains</span>(<span class="hljs-title">BlogPostDaoMemory</span>.<span class="hljs-title">helloWorldPost</span>)</span>;
+
+}
+</div></code></pre>
+<h2 id="datalaag">Datalaag</h2>
+<ul>
+<li>In het labo hebben we H2 gebruikt als database om de gegevens in op te slaan</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.h2database<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>h2<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</div></code></pre>
+<ul>
+<li>Volgende toevoegen aan properties om database te kunnen bekijken:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">spring.h2.console.enabled</span>=<span class="hljs-string">true</span>
+<span class="hljs-meta">spring.datasource.url</span>=<span class="hljs-string">jdbc:h2:mem:testdb</span>
+<span class="hljs-meta">spring.datasource.username</span>=<span class="hljs-string">sa</span>
+<span class="hljs-meta">spring.datasource.password</span>=<span class="hljs-string"></span>
+</div></code></pre>
+<h3 id="dao-klasse">DAO-klasse</h3>
+<ul>
+<li>Interface die de functies definieert</li>
+<li>Specifieke klasses die de interface implementeren
+<ul>
+<li>Annoteren met <strong>@Service</strong></li>
+<li>Annoteren met <strong>@Profile(profiel)</strong>
+<ul>
+<li>Afhankelijk indien deze DAO voor testen gebruikt wordt of niet</li>
+</ul>
+</li>
+<li>Bevat een repository (private final) -&gt; dependency injection</li>
+</ul>
+</li>
+</ul>
+<h3 id="repository">Repository</h3>
+<ul>
+<li>extends JpaRepository&lt;type object, type id&gt;</li>
+</ul>
+<h3 id="objectklasse">Objectklasse</h3>
+<ul>
+<li>Annoteren met <strong>@Entity</strong></li>
+<li>Annoteren met <strong>@Table(name=&quot;naam&quot;)</strong> (link leggen met tabel in DB)</li>
+<li>We moeten niet langer zelf een ID genereren; gewoon ID annoteren met:
+<ul>
+<li><strong>@Id</strong></li>
+<li><strong>@GeneratedValue</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="spring-beveiliging">Spring (Beveiliging)</h1>
+<h2 id="dependecy">Dependecy</h2>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.security<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-security-test<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</div></code></pre>
+<h2 id="beveiligingsklasse">Beveiligingsklasse</h2>
+<ul>
+<li><strong>@Configuration</strong></li>
+<li><strong>@EnableMethodSecurity(securedEnabled = true)</strong></li>
+<li>Credentials in properties (of zelf andere waardes te kiezen):</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">users.admin.username</span>=<span class="hljs-string">admin</span>
+<span class="hljs-meta">users.admin.password</span>=<span class="hljs-string">admin</span>
+<span class="hljs-meta">users.admin.roles</span>=<span class="hljs-string">ADMIN</span>
+<span class="hljs-meta">users.admin.encoded_password</span>=<span class="hljs-string">{bcrypt}$2a$10$/3zZXbQGPDvyZlTx2SSi.uBFLBqj/Dwc0goY9CvVjRKuH8AQ2NM/m</span>
+</div></code></pre>
+<ul>
+<li>Authenticatie toevoegen</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Value</span>(<span class="hljs-string">"${users.admin.password}"</span>)
+<span class="hljs-keyword">private</span> String adminPassword;
+
+<span class="hljs-meta">@Value</span>(<span class="hljs-string">"${users.admin.username}"</span>)
+<span class="hljs-keyword">private</span> String adminUsername;
+
+<span class="hljs-meta">@Value</span>(<span class="hljs-string">"${users.admin.roles}"</span>)
+<span class="hljs-keyword">private</span> String adminRoles;
+
+<span class="hljs-meta">@Value</span>(<span class="hljs-string">"${users.admin.encoded_password}"</span>)
+<span class="hljs-keyword">private</span> String adminEncodedPassword;
+</div></code></pre>
+<ul>
+<li>Environment toevoegen: <br> <strong>@Autowired</strong> <br> Environment naam</li>
+<li>H2-database toevoegen om gegevens om te slaan</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Bean</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> DataSource <span class="hljs-title">datasource</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.H2)
+            .addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
+            .build();
+};
+</div></code></pre>
+<ul>
+<li>Configuratie voor jdbc-authenticatie</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Bean</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> UserDetailsManager <span class="hljs-title">users</span><span class="hljs-params">(DataSource datasource)</span> </span>{
+    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    LoggerFactory.getLogger(SecurityConfig<span class="hljs-class">.<span class="hljs-keyword">class</span>).<span class="hljs-title">info</span>("<span class="hljs-title">Encoded</span> <span class="hljs-title">password</span>: " + <span class="hljs-title">encoder</span>.<span class="hljs-title">encode</span>(<span class="hljs-title">adminPassword</span>))</span>;
+    UserDetails admin = User.withUsername(adminUsername).password(encoder.encode(adminPassword)).roles(adminRoles).build();
+    <span class="hljs-comment">// Better use an externally hashed password to avoid clear text passwords in source or memory</span>
+    <span class="hljs-comment">// https://docs.spring.io/spring-security/reference/features/authentication/password-storage.html#authentication-password-storage-boot-cli</span>
+    UserDetails admin2 = User.withUsername(<span class="hljs-string">"admin2"</span>).password(adminEncodedPassword).roles(adminRoles).build();
+    JdbcUserDetailsManager users = <span class="hljs-keyword">new</span> JdbcUserDetailsManager(datasource);
+    users.createUser(admin);
+    users.createUser(admin2);
+    <span class="hljs-keyword">return</span> users;
+}
+</div></code></pre>
+<ul>
+<li>SecurityFilterChain toevoegen</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Bean</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> SecurityFilterChain <span class="hljs-title">filterChain</span><span class="hljs-params">(HttpSecurity http)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+    http.authorizeHttpRequests(requests -&gt; requests
+            .requestMatchers(<span class="hljs-keyword">new</span> AntPathRequestMatcher(<span class="hljs-string">"/admin.html"</span>)).hasRole(<span class="hljs-string">"ADMIN"</span>)
+            .anyRequest().permitAll())
+        .httpBasic(Customizer.withDefaults())
+        .csrf(csrf -&gt; csrf
+
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .ignoringRequestMatchers(<span class="hljs-keyword">new</span> AntPathRequestMatcher(<span class="hljs-string">"/h2-console/**"</span>))
+                .csrfTokenRequestHandler(<span class="hljs-keyword">new</span> CsrfTokenRequestAttributeHandler())) <span class="hljs-comment">// Disable BREACH</span>
+        .headers(headers -&gt; headers
+                .frameOptions(frameOptionsConfig -&gt; frameOptionsConfig.sameOrigin()));
+    <span class="hljs-keyword">if</span> (environment.getActiveProfiles().length &gt; <span class="hljs-number">0</span> &amp;&amp; environment.getActiveProfiles()[<span class="hljs-number">0</span>].trim().equalsIgnoreCase(<span class="hljs-string">"test"</span>)) {
+        http.csrf(csrf -&gt; csrf.disable());
+    }
+    <span class="hljs-keyword">return</span> http.build();
+}
+</div></code></pre>
+<ul>
+<li>Om bepaalde methodes af te schermen met beveiliging
+<ul>
+<li>In de Controller-klasse</li>
+<li><strong>@PreAuthorize(&quot;functie&quot;)</strong></li>
+<li>Voorbeeld: <strong>@PreAuthorize(&quot;hasRole('ROL')&quot;)</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="spring-reactive">Spring Reactive</h1>
+<h2 id="datalaag">Datalaag</h2>
+<h3 id="objectklasse">Objectklasse</h3>
+<ul>
+<li>Annoteren met <strong>@Document(&quot;tabel&quot;)</strong> met tabel de naam van de databasetabel</li>
+<li>Instantievariabele die het id voorstelt annoteren met <strong>@Id</strong></li>
+</ul>
+<h3 id="repository">Repository</h3>
+<ul>
+<li>public interface ObjectRepository extends ReactiveMongoRepository&lt;Object, type id&gt;</li>
+<li>Alternatieven voorhanden indien er geen MongoDB gebruikt wordt</li>
+<li>Als de queries gelogd moeten worden in de console, volgende lijn toevoegen aan properties:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">logging.level.org.springframework.data.mongodb.core.ReactiveMongoTemplate</span>=<span class="hljs-string">DEBUG</span>
+</div></code></pre>
+<h2 id="rest-api">REST API</h2>
+<h3 id="dao-klasse">DAO-klasse</h3>
+<ul>
+<li>Delete-operaties hebben als returntype <strong><code>Mono&lt;Void&gt;</code></strong></li>
+<li>Functies die één enkel object teruggeven hebben als returntype <strong><code>Mono&lt;Object&gt;</code></strong></li>
+<li>Functies die meerdere objecten teruggeven hebben als returntype <strong><code>Flux&lt;Object&gt;</code></strong></li>
+<li>Post- en Put-operaties hebben als returntype <strong><code>Mono&lt;Object&gt;</code></strong></li>
+</ul>
+<h2 id="stream-teruggeven-met-x-aantal-seconden-vertraging-tussen-elk-object">Stream teruggeven met x-aantal seconden vertraging tussen elk object</h2>
+<pre class="hljs"><code><div><span class="hljs-comment">// in DAO-klasse</span>
+
+<span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Flux&lt;BlogPost&gt; <span class="hljs-title">getChangeStreamPosts</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> reactiveMongoTemplate <span class="hljs-comment">// dependency injection in constructor</span>
+                .changeStream(BlogPost<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+                .<span class="hljs-title">watchCollection</span>("<span class="hljs-title">posts</span>")
+                .<span class="hljs-title">filter</span>(<span class="hljs-title">Criteria</span>.<span class="hljs-title">where</span>("<span class="hljs-title">operationtype</span>").<span class="hljs-title">in</span>("<span class="hljs-title">insert</span>","<span class="hljs-title">replace</span>","<span class="hljs-title">update</span>"))
+                .<span class="hljs-title">listen</span>()
+                .<span class="hljs-title">mapNotNull</span>(<span class="hljs-title">ChangeStreamEvent</span>::<span class="hljs-title">getBody</span>)</span>;
+    }
+
+<span class="hljs-comment">// in Controller klasse</span>
+
+<span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">"/stream/objects-delay"</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> Flux&lt;Object&gt; <span class="hljs-title">getPostsStreamV1</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">this</span>.objectsReadCounter.increment();
+    <span class="hljs-keyword">return</span> objectDAO.getAllPosts().delayElements(Duration.ofSeconds(<span class="hljs-number">1</span>)).log();
+}
+
+<span class="hljs-meta">@GetMapping</span>(value = <span class="hljs-string">"/stream/objects-text"</span>, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+<span class="hljs-function"><span class="hljs-keyword">public</span> Flux&lt;Object&gt; <span class="hljs-title">getPostsStreamV2</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">this</span>.objectsReadCounter.increment();
+    <span class="hljs-keyword">return</span> objectDAO.getAllPosts().delayElements(Duration.ofSeconds(<span class="hljs-number">1</span>)).log();
+}
+
+<span class="hljs-meta">@GetMapping</span>(value = <span class="hljs-string">"/stream/objects-json"</span>, produces = MediaType.APPLICATION_NDJSON_VALUE)
+<span class="hljs-function"><span class="hljs-keyword">public</span> Flux&lt;Object&gt; <span class="hljs-title">getPostsStreamV3</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">this</span>.objectsReadCounter.increment();
+    <span class="hljs-keyword">return</span> objectDAO.getAllPosts().delayElements(Duration.ofSeconds(<span class="hljs-number">1</span>)).log();
+}
+
+<span class="hljs-comment">/* ChangeStream of all objects. */</span>
+<span class="hljs-meta">@GetMapping</span>(value = <span class="hljs-string">"/stream/objects"</span>, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+<span class="hljs-function"><span class="hljs-keyword">public</span> Flux&lt;Object&gt; <span class="hljs-title">getChangeStreamPosts</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">this</span>.objectsReadCounter.increment();
+    <span class="hljs-keyword">return</span> objectDAO.getChangeStreamPosts().log();
+}
+</div></code></pre>
+<h3 id="controller-klasse">Controller-klasse</h3>
+<ul>
+<li>Annoteren met <strong>@RestController</strong></li>
+<li>Zelfde regels als bij niet-Reactive-stack</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">"/naam"</span>)
+<span class="hljs-keyword">public</span> Mono&lt;ResponseEntity&lt;Void&gt;&gt; ...
+</div></code></pre>
+<h1 id="jdbc">JDBC</h1>
+<h2 id="properties">Properties</h2>
+<pre class="hljs"><code><div><span class="hljs-meta">spring.datasource.url</span>=<span class="hljs-string">jdbc:postgresql://localhost:poort/naam_db</span>
+<span class="hljs-comment">#spring.datasource.driverClassName=org.postgresql.Driver</span>
+<span class="hljs-meta">spring.datasource.username</span>=<span class="hljs-string">iii</span>
+<span class="hljs-meta">spring.datasource.password</span>=<span class="hljs-string">iiipwd</span>
+</div></code></pre>
+<h2 id="connectie--datasource">Connectie &amp; DataSource</h2>
+<pre class="hljs"><code><div><span class="hljs-meta">@Component</span>
+<span class="hljs-meta">@PropertySource</span>(<span class="hljs-string">"classpath:databankconstanten.properties"</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JDBCDataStorage</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">IDataStorage</span> </span>{
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDataSource</span><span class="hljs-params">(DataSource dataSource)</span> </span>{
+        <span class="hljs-keyword">this</span>.dataSource = dataSource;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> Connection <span class="hljs-title">openConnectie</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException </span>{
+        <span class="hljs-keyword">return</span> dataSource.getConnection();
+    }
+}
+</div></code></pre>
+<ul>
+<li>Gegevens ophalen uit .properties-bestand</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Value</span>(<span class="hljs-string">"${connectiestring}"</span>)
+<span class="hljs-keyword">private</span> String connString;
+</div></code></pre>
+<ul>
+<li>Connectie afsluiten</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">try</span> (Connection conn = openConnectie()) {
+    ...
+} <span class="hljs-keyword">catch</span> (Exception e) {
+    ...
+}
+</div></code></pre>
+
+</body>
+</html>
