@@ -745,6 +745,117 @@ management.endpoints.web.exposure.include=health,info,metrics</li>
     ...
 }
 </div></code></pre>
+<ul>
+<li>Objecten ophalen
+<ul>
+<li>Schrijf hulpfuncties om objecten aan te maken die een ResultSet aanvaarden als parameter</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;IObject&gt; <span class="hljs-title">getObjects</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> DataExceptie </span>{
+    List&lt;IObjects&gt; objects;
+    <span class="hljs-keyword">try</span>(Connection conn = dataSource.getConnection()) {
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(SELECT_OBJECTS); <span class="hljs-comment">// @Value(...)</span>
+        <span class="hljs-keyword">while</span> (resultSet.next()) {
+            products.add(createObject(resultSet)); <span class="hljs-comment">// hulpfunctie</span>
+        }
+    } <span class="hljs-keyword">catch</span>(SQLException e) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> DataExceptie(FOUT_OBJECTS);
+    }
+    <span class="hljs-keyword">return</span> objects;
+}
+</div></code></pre>
+<ul>
+<li>Objecten ophalen aan de hand van een voorwaarde</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;IObject&gt; <span class="hljs-title">getObjects</span><span class="hljs-params">(<span class="hljs-keyword">int</span> parameter)</span> <span class="hljs-keyword">throws</span> DataExceptie </span>{ <span class="hljs-comment">// int kan ook een ander type zijn</span>
+    List&lt;IObject&gt; objects;
+    <span class="hljs-keyword">try</span> (Connection conn = openConnectie();
+            PreparedStatement stmt = conn.prepareStatement(SELECT_OBJECTS_PARAMETER)) { <span class="hljs-comment">// @Value(...)</span>
+        stmt.setInt(<span class="hljs-number">1</span>, parameter); <span class="hljs-comment">// of een ander type</span>
+        ResultSet rs = stmt.executeQuery();
+        orders = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">while</span> (rs.next()) {
+            objects.add(createObject(rs)); <span class="hljs-comment">// hulpfunctie</span>
+        }
+    } <span class="hljs-keyword">catch</span> (SQLException ex) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> DataExceptie(FOUT_OBJECTS);
+    }
+    <span class="hljs-keyword">return</span> objects;
+}
+</div></code></pre>
+<ul>
+<li>Objecten toevoegen</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addObject</span><span class="hljs-params">(IObject object)</span> <span class="hljs-keyword">throws</span> DataExceptie </span>{
+    <span class="hljs-keyword">try</span> (
+            Connection conn = openConnectie()) {
+        <span class="hljs-keyword">try</span> {
+            conn.setAutoCommit(<span class="hljs-keyword">false</span>);
+            addObject(conn, object); <span class="hljs-comment">// hulpfunctie</span>
+            conn.commit(); <span class="hljs-comment">// opslaan</span>
+        } <span class="hljs-keyword">catch</span> (SQLException se) {
+            conn.rollback(); <span class="hljs-comment">// terugzetten naar vorige versie</span>
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> DataExceptie(FOUT_ADD_OBJECT);
+        } <span class="hljs-keyword">finally</span> {
+            conn.setAutoCommit(<span class="hljs-keyword">true</span>);
+
+        }
+    } <span class="hljs-keyword">catch</span> (Exception ex) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> DataExceptie(FOUT_ADD_OBJECT);
+    }
+}
+
+<span class="hljs-comment">// hulpfunctie</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addObject</span><span class="hljs-params">(Connection conn, IObject object)</span> <span class="hljs-keyword">throws</span> SQLException </span>{
+        <span class="hljs-keyword">try</span> (PreparedStatement stmt =
+                     conn.prepareStatement(INSERT_OBJECT)) {
+            stmt.setInt(<span class="hljs-number">1</span>, object.getNumber());
+            stmt.setDate(<span class="hljs-number">2</span>, <span class="hljs-keyword">new</span> java.sql.Date(object.getDate().getTime())); <span class="hljs-comment">// datum toevoegen</span>
+            stmt.setNull(<span class="hljs-number">3</span>, java.sql.Types.DATE); <span class="hljs-comment">//Een datum op NULL zetten; kan met eender welk type</span>
+            stmt.executeUpdate();
+        }
+    }
+</div></code></pre>
+<ul>
+<li>Objecten updaten</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">modifyObject</span><span class="hljs-params">(IObject object)</span> <span class="hljs-keyword">throws</span> DataExceptie </span>{
+    <span class="hljs-keyword">try</span> (Connection conn = openConnectie(); PreparedStatement stmt = conn.prepareStatement(UPDATE_OBJECT)) {
+        stmt.setString(<span class="hljs-number">1</span>, object.getParameter1());
+        stmt.setString(<span class="hljs-number">2</span>, object.getParameter2());
+        <span class="hljs-comment">// zo door voor elke parameter</span>
+        <span class="hljs-keyword">if</span> (customer.getParameterThatCanBeNull() != <span class="hljs-keyword">null</span> &amp;&amp; !customer.getParameterThatCanBeNull().equals(<span class="hljs-string">""</span>)) {
+            stmt.setString(<span class="hljs-number">6</span>, object.getParameterThatCanBeNull());
+        } <span class="hljs-keyword">else</span> {
+            stmt.setNull(<span class="hljs-number">6</span>, java.sql.Types.VARCHAR);
+        }
+        <span class="hljs-comment">// zo door voor alle parameters</span>
+        stmt.executeUpdate();
+
+    } <span class="hljs-keyword">catch</span> (SQLException ex) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> DataExceptie(FOUT_UPDATE_OBJECT);
+    }
+}
+</div></code></pre>
+<ul>
+<li>Object verwijderen</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">deleteObject</span><span class="hljs-params">(<span class="hljs-keyword">int</span> objectId)</span> <span class="hljs-keyword">throws</span> DataExceptie </span>{
+    <span class="hljs-keyword">try</span> (Connection conn = openConnectie(); PreparedStatement stmt = conn.prepareStatement(DELETE_OBJECT)) {
+        stmt.setInt(<span class="hljs-number">1</span>, objectId); <span class="hljs-comment">// kan met elk type dat gebruikt wordt om het object te identificeren</span>
+        stmt.executeUpdate();
+    } <span class="hljs-keyword">catch</span> (SQLException ex) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> DataExceptie(FOUT_DELETE_OBJECT);
+    }
+}
+</div></code></pre>
 
 </body>
 </html>

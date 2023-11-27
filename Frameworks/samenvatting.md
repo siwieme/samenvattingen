@@ -347,3 +347,107 @@ try (Connection conn = openConnectie()) {
     ...
 }
 ```
+* Objecten ophalen
+    * Schrijf hulpfuncties om objecten aan te maken die een ResultSet aanvaarden als parameter
+```java
+@Override
+public List<IObject> getObjects() throws DataExceptie {
+    List<IObjects> objects;
+    try(Connection conn = dataSource.getConnection()) {
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(SELECT_OBJECTS); // @Value(...)
+        while (resultSet.next()) {
+            products.add(createObject(resultSet)); // hulpfunctie
+        }
+    } catch(SQLException e) {
+        throw new DataExceptie(FOUT_OBJECTS);
+    }
+    return objects;
+}
+```
+
+* Objecten ophalen aan de hand van een voorwaarde
+```java
+@Override
+public List<IObject> getObjects(int parameter) throws DataExceptie { // int kan ook een ander type zijn
+    List<IObject> objects;
+    try (Connection conn = openConnectie();
+            PreparedStatement stmt = conn.prepareStatement(SELECT_OBJECTS_PARAMETER)) { // @Value(...)
+        stmt.setInt(1, parameter); // of een ander type
+        ResultSet rs = stmt.executeQuery();
+        orders = new ArrayList<>();
+        while (rs.next()) {
+            objects.add(createObject(rs)); // hulpfunctie
+        }
+    } catch (SQLException ex) {
+        throw new DataExceptie(FOUT_OBJECTS);
+    }
+    return objects;
+}
+```
+* Objecten toevoegen
+```java
+@Override
+public void addObject(IObject object) throws DataExceptie {
+    try (
+            Connection conn = openConnectie()) {
+        try {
+            conn.setAutoCommit(false);
+            addObject(conn, object); // hulpfunctie
+            conn.commit(); // opslaan
+        } catch (SQLException se) {
+            conn.rollback(); // terugzetten naar vorige versie
+            throw new DataExceptie(FOUT_ADD_OBJECT);
+        } finally {
+            conn.setAutoCommit(true);
+
+        }
+    } catch (Exception ex) {
+        throw new DataExceptie(FOUT_ADD_OBJECT);
+    }
+}
+
+// hulpfunctie
+private void addObject(Connection conn, IObject object) throws SQLException {
+        try (PreparedStatement stmt =
+                     conn.prepareStatement(INSERT_OBJECT)) {
+            stmt.setInt(1, object.getNumber());
+            stmt.setDate(2, new java.sql.Date(object.getDate().getTime())); // datum toevoegen
+            stmt.setNull(3, java.sql.Types.DATE); //Een datum op NULL zetten; kan met eender welk type
+            stmt.executeUpdate();
+        }
+    }
+```
+* Objecten updaten
+```java
+@Override
+public void modifyObject(IObject object) throws DataExceptie {
+    try (Connection conn = openConnectie(); PreparedStatement stmt = conn.prepareStatement(UPDATE_OBJECT)) {
+        stmt.setString(1, object.getParameter1());
+        stmt.setString(2, object.getParameter2());
+        // zo door voor elke parameter
+        if (customer.getParameterThatCanBeNull() != null && !customer.getParameterThatCanBeNull().equals("")) {
+            stmt.setString(6, object.getParameterThatCanBeNull());
+        } else {
+            stmt.setNull(6, java.sql.Types.VARCHAR);
+        }
+        // zo door voor alle parameters
+        stmt.executeUpdate();
+
+    } catch (SQLException ex) {
+        throw new DataExceptie(FOUT_UPDATE_OBJECT);
+    }
+}
+```
+* Object verwijderen
+```java
+@Override
+public void deleteObject(int objectId) throws DataExceptie {
+    try (Connection conn = openConnectie(); PreparedStatement stmt = conn.prepareStatement(DELETE_OBJECT)) {
+        stmt.setInt(1, objectId); // kan met elk type dat gebruikt wordt om het object te identificeren
+        stmt.executeUpdate();
+    } catch (SQLException ex) {
+        throw new DataExceptie(FOUT_DELETE_OBJECT);
+    }
+}
+```
