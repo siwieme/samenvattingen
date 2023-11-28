@@ -22,6 +22,18 @@
 * **@GetMapping("/naam")**
 * **@GetMapping("/naam/{parameter})**
 * Parameter oproepen in functie: public Returntype functieNaam(**@PathVariable("parameter")** type parameter)
+* Indien er een parameter is die iets kan teruggeven dat errors geeft:
+```java
+// In DAO
+public Optional<Objet> getObject(type id) {
+    return Optional.ofNullable(objects.get(id));
+}
+// In Controller
+@GetMapping("/objects/{id}")
+public BlogPost getObject(@PathVariable("id") type id) {
+    return objectDao.getObject(id).orElseThrow(() -> new ObjectNotFoundException(id));
+}
+```
 
 ### POST-request
 * **@PostMapping("/naam")**
@@ -40,6 +52,10 @@
 
 ### HTTP-code teruggeven
 * **@ResponseStatus(HttpStatus.NAAM)**
+* Indien er een andere code moet teruggegeven worden, dan de geannoteerde: 
+```java
+throw new ResponseStatusException(HttpStatus.NAAM, "_reden_");
+```
 
 ### ExceptionHandler
 * **@ResponseStatus(HttpStatus.NOT_FOUND)** of een andere HTTP-code

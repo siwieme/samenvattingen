@@ -394,7 +394,18 @@ code {
 <li><strong>@GetMapping(&quot;/naam&quot;)</strong></li>
 <li><strong>@GetMapping(&quot;/naam/{parameter})</strong></li>
 <li>Parameter oproepen in functie: public Returntype functieNaam(<strong>@PathVariable(&quot;parameter&quot;)</strong> type parameter)</li>
+<li>Indien er een parameter is die iets kan teruggeven dat errors geeft:</li>
 </ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// In DAO</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> Optional&lt;Objet&gt; <span class="hljs-title">getObject</span><span class="hljs-params">(type id)</span> </span>{
+    <span class="hljs-keyword">return</span> Optional.ofNullable(objects.get(id));
+}
+<span class="hljs-comment">// In Controller</span>
+<span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">"/objects/{id}"</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> BlogPost <span class="hljs-title">getObject</span><span class="hljs-params">(@PathVariable(<span class="hljs-string">"id"</span>)</span> type id) </span>{
+    <span class="hljs-keyword">return</span> objectDao.getObject(id).orElseThrow(() -&gt; <span class="hljs-keyword">new</span> ObjectNotFoundException(id));
+}
+</div></code></pre>
 <h3 id="post-request">POST-request</h3>
 <ul>
 <li><strong>@PostMapping(&quot;/naam&quot;)</strong></li>
@@ -416,7 +427,10 @@ code {
 <h3 id="http-code-teruggeven">HTTP-code teruggeven</h3>
 <ul>
 <li><strong>@ResponseStatus(HttpStatus.NAAM)</strong></li>
+<li>Indien er een andere code moet teruggegeven worden, dan de geannoteerde:</li>
 </ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ResponseStatusException(HttpStatus.NAAM, <span class="hljs-string">"_reden_"</span>);
+</div></code></pre>
 <h3 id="exceptionhandler">ExceptionHandler</h3>
 <ul>
 <li><strong>@ResponseStatus(HttpStatus.NOT_FOUND)</strong> of een andere HTTP-code</li>
