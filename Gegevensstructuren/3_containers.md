@@ -92,7 +92,7 @@
 * Ordered tree: order of the children matters
 * Multiway tree: children have fixed index, certain children might be missing
 
-![Afbeelding met tekst, schermopname, Lettertype Automatisch gegenereerde beschrijving](vertopal_3c7be8d421b244f4b0eeca6b76d15773/media/image3.png)
+![Afbeelding met tekst, schermopname, Lettertype Automatisch gegenereerde beschrijving](afbeeldingen/media/image3.png)
 
 **Depth first search**
 
@@ -111,7 +111,7 @@
 
 * Example: linked list; tree ...
 
-![Afbeelding met tekst, schermopname, Lettertype, lijn Automatisch gegenereerde beschrijving](vertopal_3c7be8d421b244f4b0eeca6b76d15773/media/image4.png)
+![Afbeelding met tekst, schermopname, Lettertype, lijn Automatisch gegenereerde beschrijving](afbeeldingen/media/image4.png)
 
 **Advantages**
 
@@ -122,8 +122,8 @@ Recursive solutions are elegant and easy to implement
 Typically slower than an implementation using loops; Uses more memory;
 will not work for very large problems; difficult to debug
 
-![Afbeelding met tekst, schermopname, diagram Automatisch gegenereerde beschrijving](vertopal_3c7be8d421b244f4b0eeca6b76d15773/media/image5.png)
+![Afbeelding met tekst, schermopname, diagram Automatisch gegenereerde beschrijving](afbeeldingen/media/image5.png)
 
-![Afbeelding met tekst, diagram, lijn, Lettertype Automatisch gegenereerde beschrijving](vertopal_3c7be8d421b244f4b0eeca6b76d15773/media/image6.png)
+![Afbeelding met tekst, diagram, lijn, Lettertype Automatisch gegenereerde beschrijving](afbeeldingen/media/image6.png)
 
-![Afbeelding met tekst, schermopname, Lettertype, lijn Automatisch gegenereerde beschrijving](vertopal_3c7be8d421b244f4b0eeca6b76d15773/media/image7.png)
+![Afbeelding met tekst, schermopname, Lettertype, lijn Automatisch gegenereerde beschrijving](afbeeldingen/media/image7.png)
