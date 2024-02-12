@@ -88,3 +88,187 @@
     * Measure image attributes
     * Model the class based on these futures
     * Succes story: found 16 new high red-shift quasars
+
+#### Predictive: Regression Analysis
+
+* Predict a value of a given continuous valued variable based on the values of other variables, assuming a linear or non-linear model of dependence
+* Extensively studied in statistics, neural network fields
+* Examples
+    * Predicting sales amounts of new products based on advertising expenditure
+    * Predicting wind velocities as a function of temperature, humidity, air pressure, etc.
+
+#### Descriptive: Clustering
+
+* Find groups of items that are similar among themselves but are different from the items in other groups
+
+#### Clustering Applications
+
+* Understanding
+    * Grouping genes that have similar expression patterns
+    * Grouping proteins with similar functionality
+    * Custom profiling for target marketing
+* Summarization
+    * Reducing the size of large data sets
+
+
+#### Clustering: Market Segmentation
+
+* Goal: subdivide a market into distinct subsets of customers where any subset may conceivably be selected as a market target to be reached with a distinct marketing mix
+* Approach:
+    * Use customer information to segment the market
+    * Use the segments to target the marketing mix
+
+#### Descriptive and Predictive: Association Rules
+
+* Given a set of records each containing a number of items from a collection
+* Produce dependency rules predicting occurrence of an item based on occurrences of other items
+
+#### Association Analysis: Applications
+
+* Market basket analysis
+    * Rules are used for sales promotion, shelf management and inventory management
+* Telecommunication alarm diagnosis
+    * Rules are used to find combination of alarms that frequently occur together
+* Medical Informatics
+    * Rules are used to find associations between diseases and symptoms
+
+#### Descriptive: Deviation / Anomaly / Change Detection
+
+* Find significant deviations from normal behavior
+* Examples
+    * Detecting credit card fraud
+    * Detecting faults in a system
+    * Detecting intruders in a computer network
+
+### Attribute Types and Dataset Types
+
+#### Data Definitions
+
+* **Attribute**: a property or characteristic of an object
+* **Data object**: a collection of attributes describe one
+* **Attribute values**: the set of possible values for an attribute
+* **Data**: a collection of data objects and their attributes
+
+#### Types of Attributes
+
+* **Nominal**: values from an unordered set
+    * E.g. blood type, eye color
+* **Ordinal**: values from an ordered set
+    * E.g. grades, job titles
+* **Interval**: values from an ordered set of equal-size intervals
+    * E.g. temperature in Celsius
+* **Ratio**: values from an ordered set of equal-size ratios
+
+#### Properties of Attribute Values
+
+* Mapped to attribute types
+    * **Nominal** attribute: distinctness
+    * **Ordinal** attribute: distinctness, order
+    * **Interval** attribute: distinctness, order, meaningful differences
+    * **Ratio** attribute: distinctness, order, meaningful differences and ratios
+
+#### Discrete and Continuous Attributes
+
+* **Discrete**: finite or countably infinite set of values
+    * E.g. social security number, zip code, number of cars in a household
+* **Continuous**: an interval of real numbers
+    * E.g. temperature, height, weight
+
+#### Types of Datasets
+
+* Record
+    * Data matrix
+    * Document data
+    * Transaction data
+* Graph
+    * World Wide Web
+    * Molecular structure
+* Ordered
+    * Spatial data
+    * Temporal data
+    * Sequential data
+    * Genetic sequence data
+* Important characteristics: dimensionality, sparsity, size
+
+#### Record Data
+
+* Data that consists of a collection of records, each of which consists of a fixed set of attributes
+
+#### Record: Data Matrix
+
+* Same fixed set of numeric attributes
+* Represented by an m x n matrix
+    * m rows: objects
+    * n columns: attributes
+
+#### Record: Document Data
+
+* Each document becomes a 'term' vector
+    * Each term is a component of the vector
+    * The value of the component is the frequency of the term in the document
+
+#### Record: Transaction Data
+
+* Each transaction is a record
+* Each transaction consists of a set of items
+
+#### Graph Data
+
+* Data that consists of a collection of records, each of which consists of a collection of nodes and edges
+
+#### Ordered Data
+
+* Data that consists of a collection of records, each of which consists of an ordered set of attributes
+
+### Data Similarity and Dissimilarity Measures
+
+#### Similarity and Dissimilarity Measures
+
+* Similarity measure
+    * Numerical measure of how alike two data objects are
+    * Higher value means more similar
+* Dissimilarity measure
+    * Numerical measure of how different two data objects are
+    * Lower value means more similar
+
+#### Euclidean Distance
+
+* n is the number of dimensions
+* Normalization is necessary, if scales differ
+
+#### Normalization
+
+* Data scaled to fall within a small, specified range
+* E.g. [0, 1] or [-1, 1]
+
+#### Min-Max Normalization: Outliers Problematic
+
+* Min-Max Normalization
+    * Downside: does not handle outliers well
+
+#### Z-Score Normalization
+
+* Avoids the problem of outliers
+* (value - mean) / standard deviation
+    * Below mean: negative
+    * Above mean: positive
+
+#### Minkowski Distance
+
+* Generalization of Euclidean distance
+![alt text](afbeeldingen/image.png)
+
+#### Common Properties of a Distance
+
+* d(x, y) ≥ 0 for all x and y and d(x, y) = 0 only if x = y (positive definiteness)
+* d(x, y) = d(y, x) for all x and y (symmetry)
+* d(x, z) ≤ d(x, y) + d(y, z) for all points x, y, and z (triangle inequality)
+
+#### Common Properties of a Similarity
+
+* s(x, y) = 1 if x = y 
+* s(x, y) = s(y, x) for all x and y (symmetry)
+
+#### Density
+
+* Measures degree to which data objects are close to each other in a specified area
