@@ -33,6 +33,7 @@
     * `-r` optie: kopieert mappen en hun inhoud
 * `mv <bestand> <map>`: verplaatst een bestand naar een map
     * `-i` optie: vraagt bevestiging voor het overschrijven van bestanden
+* `pwd`: toont de huidige map
 
 ### Aliassen
 
