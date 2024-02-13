@@ -1,4 +1,4 @@
-# Deel 1 - Inleiding
+# Deel I - Inleiding
 
 ## Terminal
 
