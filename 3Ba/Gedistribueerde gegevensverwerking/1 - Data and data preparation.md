@@ -272,3 +272,62 @@
 #### Density
 
 * Measures degree to which data objects are close to each other in a specified area
+* Notion of density is closely related to that of proximity
+* Concept of density is typically used for clustering and anomaly detection
+* Examples
+    * Eucledian density 
+        * Number of points within a given radius
+    * Graph-based density
+        * Connectivity of a point to its neighbors
+
+#### Euclidean Density: Grid-based
+
+* Simplest approach is to divide region into a number of rectangular cells of equal volume and define density as # of points in the cell
+
+#### Euclidean Density: Center-based
+
+* Density of a point is the number of points within a given radius
+
+### Data Preprocessing
+
+#### Why Data Preprocessing?
+
+* Data in the real world is *dirty*
+    * Incomplete: lacking attribute values, lacking certain attributes of interest, or containing only aggregate data
+    * Noisy: containing errors or outliers
+    * Inconsistent: containing discrepancies in codes or names
+* No quality data, no quality mining results
+    * Quality decisions must be based on quality data
+    * Example: a classification model for detecting people who are loan risks is built using poor data
+        * Credit-worthy people may be denied loans
+        * Non-credit-worthy people may be given loans
+
+#### Major Tasks in Data Preprocessing
+
+* Data cleaning
+    * Fill in missing values, smooth noisy data, identify or remove outliers, and resolve inconsistencies
+* Data integration
+    * Integration of multiple databases, data cubes, or files
+* Data transformation
+    * Normalization and aggregation
+* Data reduction
+    * Reducing the volume but producing the same or similar analytical results
+
+#### Data Cleaning / Cleansing / Scrubbing
+
+* Dirty data examples
+    * Presence of dummy values
+    * Absence of fields
+    * Contradictions in the data
+    * Violation of business rules
+    * Reused primary keys
+* Data cleaning = process of detecting and correcting / removing corrupt or inaccurate records
+    * Inconsistencies may be caused by user error, corruption in transmission / storage, etc.
+    * Identifying incomplete, incorrect, inaccurate or irrelevant parts of data
+    * Replacing, modifying, deleting this dirty data
+    * Can be performed interactively with data wrangling tools
+    * Can be performed through batch processing / scripting
+* After cleansing a data set should be consistent
+* Not only used to clean up the data in a DB but also to bring consistency to different sets of data that have been
+merged from separate databases
+* Differs from data validation where data is rejected from the system at time of entry, instead of afterwards
