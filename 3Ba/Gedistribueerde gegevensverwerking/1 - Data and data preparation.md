@@ -331,3 +331,408 @@
 * Not only used to clean up the data in a DB but also to bring consistency to different sets of data that have been
 merged from separate databases
 * Differs from data validation where data is rejected from the system at time of entry, instead of afterwards
+
+#### High Data Quality Criteria
+
+* Accuracy
+    * Correctness of the data
+* Completeness
+    * All required data is recorded
+* Consistency
+    * Data is consistent within the data set
+* Uniformity
+    * Data is in the same format
+* Validity
+    * Data conforms to the defined business rules
+
+#### Data Quality
+
+* Noise and outliers
+* Missing values
+* Duplicate data
+* Wrong data
+
+#### Data Cleaning Operations
+
+* Removing typographical errors
+* Properly labelling mislabelled data
+* Validating / correcting values against a known list of entities
+    * Strict validation = rejecting any entry that does not have valid fields
+    * Fuzzy validation = correcting entries that are close to valid entries
+* Cross-checking with a validated data set
+* Data enhancement: data is made more complete by adding new data
+* Harmonization: data is made consistent by converting it into a common format
+
+#### Missing Values
+
+* Reasons for missing values
+    * Information is not collected
+    * Attributes may not be applicable to all cases
+
+#### Handling Missing Data
+
+* Ignore the column / attribute
+* Fill in the missing value manually
+* Replace missing value with interpolated estimate
+* Use a global constant to fill in the missing value
+* Use the attribute mean or median to fill in the missing value
+* Use the most probable value to fill in the missing value
+
+## DATA NOISE
+
+##### ̶ Data with an amount of meaningless information in it
+
+```
+̶ Data = true signal + noise
+```
+##### ̶ Increases the amount of storage space required
+
+##### ̶ Can affect the results of data analysis
+
+##### ̶ Examples
+
+```
+̶ Distortion of a person’s voice when talking on a poor phone
+̶ Snow on television screen, artefacts on modern digital TV signals
+```
+
+## HANDLING NOISY DATA
+
+```
+̶ Binning method
+̶ First sort data and partition into (equal-depth) bins
+̶ Then smooth by bin means, smooth by bin median, smooth by bin boundaries, etc.
+̶ Clustering
+̶ Detect and remove outliers
+̶ Combined computer and human inspection
+̶ Detect suspicious values and check by human
+̶ Regression
+̶ Smooth by fitting the data into regression functions
+```
+```
+73
+Linear regression function versus quadratic regression function on noisy data
+```
+
+## OUTLIERS
+
+### ̶ Outliers are data objects with characteristics
+
+### that are considerably different than most
+
+### other data objects in the data set
+
+```
+̶ Case 1: Outliers are noise that interferes with data
+analysis
+̶ Case 2: Outliers are the goal of our analysis
+‒ Credit card fraud
+‒ Intrusion detection
+```
+
+## SIMPLE DISCRETIZATION METHODS: BINNING
+
+##### ̶ Equal-width (distance) partitioning
+
+```
+̶ Divides the range into N intervals of equal size: uniform grid
+̶ if A and B are the lowest and highest values of the attribute, the width of intervals will
+be: W = (B-A)/N.
+̶ Most straightforward but outliers may dominate presentation
+̶ Skewed data is not handled well
+```
+##### ̶ Example
+
+```
+̶ Data: 0, 4, 12, 16, 16, 18, 24, 26, 28
+‒ Equal width binning
+‒ Bin 1: 0,4 [-,10[
+‒ Bin 2: 12, 16, 16, 18 [10, 20[
+‒ Bin 3: 24, 26, 28 [20, +[
+```
+
+## SIMPLE DISCRETIZATION METHODS: BINNING
+
+### ̶ Equal-depth (frequency) partitioning
+
+```
+̶ Divides the range into N intervals, each containing approximately same number of
+samples
+̶ Good data scaling
+```
+### ̶ Example
+
+```
+̶ Data: 0, 4, 12, 16, 16, 18, 24, 26, 28
+‒ Equal frequency binning
+‒ Bin 1: 0,4, 12 [-,14[
+‒ Bin 2: 16, 16, 18 [14, 21[
+‒ Bin 3: 24, 26, 28 [21, +[
+```
+
+## DATA SMOOTHING BY MEANS OF BINNING
+
+```
+̶ Sorted data for price: 4, 8, 9, 15, 21, 21, 24, 25, 26, 28, 29, 34
+̶ Partition into (equal-depth) bins
+̶ Bin 1: 4, 8, 9, 15
+̶ Bin 2: 21, 21, 24, 25
+̶ Bin 3: 26, 28, 29, 34
+̶ Smoothing by bin means
+̶ Bin 1: 9, 9, 9, 9
+̶ Bin 2: 23, 23, 23, 23
+̶ Bin 3: 29, 29, 29, 29
+̶ Smoothing by bin boundaries
+̶ Bin 1: 4, 4, 4, 15
+̶ Bin 2: 21, 21, 25, 25
+̶ Bin 3: 26, 26, 26, 34
+```
+
+## DATA CLEANSING EXAMPLE: PARSING
+
+### ̶ Parsing locates and identifies individual data elements in the source
+
+### files and isolates these data elements in the target files
+
+
+## DATA CLEANSING EXAMPLE: CORRECTING
+
+### ̶ Corrects parsed individual data components using algorithms and
+
+### secondary data sources
+
+
+## DATA CLEANSING EXAMPLE: TYPOS / INCONSISTENCIES
+
+### ̶ “Composition” equals “composition”
+
+### ̶ “Asphalt” equals “asphalt”
+
+### ̶ “shake-single” should be “Shake Single”
+
+### ̶ “asphalt, shake-single” should be “Shake Single”
+
+
+## DATA CLEANSING EXAMPLE: STANDARDIZING
+
+### ̶ Applies conversion routines to transform data into its preferred
+
+### (consistent) format using both standard and custom business rules
+
+
+## DATA CLEANSING EXAMPLE: MATCHING
+
+### ̶ Searching and matching records within and across the parsed, corrected
+
+### and standardized data based on predefined business rules to eliminate
+
+### duplications
+
+
+## DATA CLEANSING EXAMPLE: CONSOLIDATING
+
+### ̶ Analyzing and identifying relationships between matched records and
+
+### consolidating / merging them into one representation
+
+
+## DATA INTEGRATION ISSUES
+
+```
+̶ Data integration: combine data from multiple sources
+̶ Schema integration
+̶ Integrate metadata from different sources
+̶ Entity identification problem: identify real world entities from multiple data sources e.g. A.cust-id ≡ B.cust-#
+̶ Detecting and resolving data value conflicts
+̶ For the same real-world entity, attribute values from different sources are different
+̶ Possible reasons: different representations, different scales, e.g. metric vs. British units
+̶ Redundant data occurs often when integrating multiple DBs
+̶ Same attribute may have different names in different DBs
+̶ Careful integration of the data from multiple sources may help reduce/avoid redundancies and
+inconsistencies and improve mining speed and quality
+```
+
+## DATA REDUCTION STEPS
+
+### ̶ Sampling
+
+### ̶ Dimensionality reduction
+
+### ̶ Feature subset selection
+
+### ̶ Feature creation
+
+### ̶ Discretization
+
+
+## DATA REDUCTION: SAMPLING
+
+### ̶ Sampling is a technique employed for data reduction
+
+̶ Often used for both preliminary investigation of data and final data analysis
+
+### ̶ Sampling is typically used in data mining because processing the entire
+
+### set of data of interest is too expensive or time consuming
+
+### ̶ Key principle for effective sampling
+
+```
+̶ Using a sample will work almost as well as using the entire data set, if the sample
+is representative
+̶ A sample is representative if it has approximately the same properties (of
+interest) as the original set of data
+```
+
+## DATA REDUCTION: SAMPLE SIZE
+
+```
+8000 points 2000 Points 500 Points
+```
+
+## DATA REDUCTION: TYPES OF SAMPLING
+
+##### ̶ Simple Random Sampling
+
+```
+̶ Equal probability of selecting any particular item
+̶ Sampling without replacement
+‒ As each item is selected, it is removed from the population
+̶ Sampling with replacement
+‒ Objects are not removed from the population as they are selected for the sample
+‒ Same object can be picked up more than once
+```
+##### ̶ Stratified sampling
+
+```
+̶ Split the data into several partitions
+̶ Draw random samples from each partition
+```
+
+## DATA REDUCTION: DIMENSIONALITY REDUCTION
+
+### ̶ Purpose
+
+```
+̶ Reduce amount of time and memory required by data mining algorithms
+̶ Allow data to be more easily visualized
+̶ May help to eliminate irrelevant features or reduce noise
+```
+### ̶ Techniques
+
+```
+̶ Principal Components Analysis (PCA)
+̶ Singular Value Decomposition
+̶ Others: supervised and non-linear techniques
+```
+
+## DATA REDUCTION: FEATURE SUBSET SELECTION
+
+##### ̶ A way to reduce dimensionality of data
+
+```
+̶ Compared to dimensionality reduction: feature subset selection is simply selecting which
+features to use, while dimensionality reduction techniques typically transform features
+```
+##### ̶ Redundant features
+
+```
+̶ Duplicate much or all of the information contained in one or more other attributes
+̶ Example: purchase price of a product and the amount of sales tax paid
+```
+##### ̶ Irrelevant features
+
+```
+̶ Contain no information that is useful for the data mining task at hand
+̶ Example: students' ID is often irrelevant to the task of predicting students’ grade points
+```
+##### ̶ Many different techniques developed
+
+
+## DATA REDUCTION: FEATURE CREATION
+
+### ̶ Create new attributes that can capture the important information in a
+
+### data set much more efficiently than the original attributes
+
+### ̶ Three general methods
+
+```
+̶ Feature extraction
+‒ Example: extracting edges from images
+̶ Feature construction
+‒ Example: dividing mass by volume to get density
+̶ Mapping data to new space
+‒ Example: Fourier and wavelet analysis
+```
+
+## DATA REDUCTION: DISCRETIZATION
+
+### ̶ Discretization is the process of converting a continuous attribute into an
+
+### ordinal attribute
+
+```
+̶ A potentially infinite number of values are mapped into a small number of
+categories
+̶ Commonly used in classification
+```
+
+## IRIS SAMPLE DATA SET
+
+### ̶ Iris Plant data set
+
+```
+̶ Three flower types (classes)
+‒ Setosa
+‒ Versicolour
+‒ Virginica
+̶ Four (non-class) attributes
+‒ Sepal width and length
+‒ Petal width and length
+```
+```
+Virginica. Robert H.
+Mohlenbrock. USDA NRCS. 1995.
+Northeast wetland flora: Field
+office guide to plant species.
+Northeast National Technical
+Center, Chester, PA. Courtesy of
+USDA NRCS Wetland Science
+Institute.
+```
+
+## DISCRETIZATION: IRIS EXAMPLE
+
+```
+Petal width low or petal length low → Setosa
+Petal width medium or petal length medium → Versicolour
+Petal width high or petal length high → Virginica
+```
+
+# SUMMARY
+
+
+## SUMMARY
+
+```
+̶ Setting
+̶ Enormous amounts of data being generated
+̶ No longer possible to process this data in a non-distributed manner
+̶ Data Mining
+̶ Distilling knowledge from all this data
+̶ Attribute types and dataset types
+̶ Records, attributes, distances and densities
+̶ Data pre-processing
+̶ Data cleaning: parsing, correcting, standardizing, matching and consolidating
+̶ Noise and outliers
+̶ Data reduction: sampling, dimensionality reduction, feature selection, feature creation, discretization
+```
+
+## REFERENCES
+
+### ̶ Introduction to Data Mining, 2nd edition, Pang-Ning Tan, Michael
+
+### Steinbach, Anuj Karpatne, Vipin Kumar
+
+### ̶ https://elitedatascience.com/data-cleaning
