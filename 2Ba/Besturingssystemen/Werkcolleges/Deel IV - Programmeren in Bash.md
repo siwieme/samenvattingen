@@ -51,6 +51,9 @@
     * `dd if=<bestand> of=<bestand> bs=<blokgrootte>`: kopieert een bestand met een bepaalde blokgrootte
     * `dd if=<bestand> of=<bestand> bs=<blokgrootte> count=<aantal>`: kopieert een bestand met een bepaalde blokgrootte en een bepaald aantal blokken
 
+* Commando `head`:
+    * `head -c <aantal> <bestand> > <bestand2>` : door middel van output redirection kan je een bepaald aantal karakters van een bestand naar een ander bestand schrijven
+
 * Commando `find`:
     * `find <map> -name <patroon>`: zoekt bestanden in een map met een bepaald patroon
     * `find` : toont alle bestanden in de huidige map 
