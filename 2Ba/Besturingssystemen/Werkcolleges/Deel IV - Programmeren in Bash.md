@@ -40,7 +40,7 @@
     * `printf`: toont een opgemaakte string
     * `:`: doet niets
 
-* Commando `sync`: synchroniseert het bestandssysteem met de schijf
+* Commando `sync`: buffers flushen naar schijf
 
 * Afbeelding maken van een USB-pen:
     * `dd if=/dev/sdb of=usb.img`: maakt een afbeelding van een USB-pen
