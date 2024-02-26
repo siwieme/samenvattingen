@@ -64,3 +64,14 @@ Andere foto's op slides
 ### I/O-apparaten en bestanden
 
 #### Regeling van de gegevensstroom
+
+# Kenmerken van moderne besturingssystemen
+
+* Multitasking en multithreading
+* Symmetrische multiprocessing
+* Modulair ontwerp 
+    * Microkernelarchitectuur
+    * Objectgeoriënteerd ontwerp
+    * Gedistribueerde omgeving
+
+* Foto's op slides te zien
