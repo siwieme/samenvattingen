@@ -106,3 +106,51 @@
 
 * Alle hexadecimale getallen kleiner dan 256 die even zijn:
     * `echo {{0..9},{a..f}}{{0..9..2},{a..f..2}}`
+
+* Volgorde van brace expansion bij `echo ~{root, mail}/`:
+    * Eerst komt hij de brace expansion tegen, dan pas de tilde expansion
+    * `echo ~{root, mail}/` is hetzelfde als `echo ~root/ ~mail/`
+
+* ```bash
+    var=7
+    echo {0..$var} # toont "{0..7}"
+    eval echo {0..$var} # toont "0 1 2 3 4 5 6 7"
+    ```
+
+## Redirection, piping, filtering, process substitution en het commando find
+
+* 1 invoerkanaal (stdin), 2 uitvoerkanalen (stdout en stderr)
+    * cout/stdout (1): standaarduitvoer, gebufferd (line buffered)
+    * cerr/stderr (2): standaardfoutuitvoer, ongebufferd
+
+* Line buffered: buffer wordt geleegd bij een nieuwe lijn
+
+* Programma
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Hello ");
+    fprintf(stderr, "Fooooooouuuuuuutttttt!");
+    printf("world!");
+    return 0;
+}
+``` 
+* Uitvoer
+    * `./a.out`: "Fooouuuuuuutttttt!Hello world!"
+    * Eerst ongebufferde uitvoer, dan gebufferde uitvoer
+
+* Commando `du`: toont de grootte van bestanden en mappen
+    * `du -h <map>`: toont de grootte van bestanden en mappen in een map
+    * `du -h <bestand>`: toont de grootte van een bestand
+    * `du <bestand> > <bestand2>`: schrijft de grootte van bestand naar bestand2
+    * `du <bestand> >> <bestand2>`: schrijft de grootte van bestand naar bestand2, zonder bestand2 te overschrijven
+    * `du /<map> > <bestand2>`: schrijft de groottes van bestanden in map naar bestand2
+    * `du /<map> >> <bestand2>`: schrijft de groottes van bestanden in map naar bestand2, zonder bestand2 te overschrijven
+
+* Commando `du /etc > /dev/null`: toont niets, want `/dev/null` negeert alle geschreven data
+    * `/dev/null`: een speciaal bestand dat alle geschreven data negeert
+* Commando `cat /dev/null`: toont niets, want `/dev/null` bevat geen data
+
+
+
