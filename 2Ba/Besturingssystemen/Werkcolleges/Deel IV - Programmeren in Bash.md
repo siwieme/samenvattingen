@@ -71,3 +71,86 @@
     * `genisoimage -o <bestand>.iso -J <map>`: maakt een ISO-bestand van een map met Joliet-uitbreiding
     * `genisoimage -o root.iso -J /root`: maakt een ISO-bestand van de map `/root` met Joliet-uitbreiding
     * Joliet: vermijdt naamsveranderingen van bestanden bij het branden van een CD/DVD/image
+
+## Patterns, expansions en het opzoeken van hulp
+
+## Pathname expansion
+
+* Commando `dir a*`: toont alle bestanden die beginnen met een "a"
+* Commando `dir *a`: toont alle bestanden die eindigen met een "a"
+* Commando `dir *a*`: toont alle bestanden die een "a" bevatten
+* Commando `dir a?`: toont alle bestanden die beginnen met een "a" en gevolgd worden door één karakter
+* Commando `dir a\*`: toont alle bestanden die beginnen met een "a" en een "*"
+
+* Commando `printf "%s\n" *`: toont alle bestanden in de huidige map
+* Commando `printf "%s\n" [abcd]`: toont alle bestanden die beginnen met een "a", "b", "c" of "d"
+* Commando `printf "%s\n" [a-d]`: toont alle bestanden die beginnen met een "a", "b", "c" of "d"
+* Commando `printf "%s\n" [!abcd]`: toont alle bestanden die niet beginnen met een "a", "b", "c" of "d"
+
+* Verschil `ls abc*` en `printf "%s\n" abc*` indien er geen bestand is dat begint met "abc":
+    * `ls abc*`: toont een foutmelding
+    * `printf "%s\n" abc*`: toont "abc*"
+
+## Brace expansion
+
+* Commando `echo <opties>`:
+    * `echo {a,b,c}`: toont "a b c"
+    * `echo {1..5}`: toont "1 2 3 4 5"
+    * `echo {a..z}`: toont "a b c ... z"
+    * `echo {a..z..2}`: toont "a c e ... y"
+    * `echo M{4..7}`: toont "M4 M5 M6 M7"
+* Commando `mkdir {a,b,c}`: maakt mappen "a", "b" en "c" aan
+* Commando `touch {a,b,c}.txt`: maakt bestanden "a.txt", "b.txt" en "c.txt" aan
+* Commando `rm {a,b,c}.txt`: verwijdert bestanden "a.txt", "b.txt" en "c.txt"
+* Commando `printf "%s\n" {a,b,c}.txt`: toont "a.txt b.txt c.txt" elk op een nieuwe lijn
+
+* Alle hexadecimale getallen kleiner dan 256 die even zijn:
+    * `echo {{0..9},{a..f}}{{0..9..2},{a..f..2}}`
+
+* Volgorde van brace expansion bij `echo ~{root, mail}/`:
+    * Eerst komt hij de brace expansion tegen, dan pas de tilde expansion
+    * `echo ~{root, mail}/` is hetzelfde als `echo ~root/ ~mail/`
+
+* ```bash
+    var=7
+    echo {0..$var} # toont "{0..7}"
+    eval echo {0..$var} # toont "0 1 2 3 4 5 6 7"
+    ```
+
+## Redirection, piping, filtering, process substitution en het commando find
+
+* 1 invoerkanaal (stdin), 2 uitvoerkanalen (stdout en stderr)
+    * cout/stdout (1): standaarduitvoer, gebufferd (line buffered)
+    * cerr/stderr (2): standaardfoutuitvoer, ongebufferd
+
+* Line buffered: buffer wordt geleegd bij een nieuwe lijn
+
+* Programma
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Hello ");
+    fprintf(stderr, "Fooooooouuuuuuutttttt!");
+    printf("world!");
+    return 0;
+}
+``` 
+* Uitvoer
+    * `./a.out`: "Fooouuuuuuutttttt!Hello world!"
+    * Eerst ongebufferde uitvoer, dan gebufferde uitvoer
+
+* Commando `du`: toont de grootte van bestanden en mappen
+    * `du -h <map>`: toont de grootte van bestanden en mappen in een map
+    * `du -h <bestand>`: toont de grootte van een bestand
+    * `du <bestand> > <bestand2>`: schrijft de grootte van bestand naar bestand2
+    * `du <bestand> >> <bestand2>`: schrijft de grootte van bestand naar bestand2, zonder bestand2 te overschrijven
+    * `du /<map> > <bestand2>`: schrijft de groottes van bestanden in map naar bestand2
+    * `du /<map> >> <bestand2>`: schrijft de groottes van bestanden in map naar bestand2, zonder bestand2 te overschrijven
+
+* Commando `du /etc > /dev/null`: toont niets, want `/dev/null` negeert alle geschreven data
+    * `/dev/null`: een speciaal bestand dat alle geschreven data negeert
+* Commando `cat /dev/null`: toont niets, want `/dev/null` bevat geen data
+
+
+

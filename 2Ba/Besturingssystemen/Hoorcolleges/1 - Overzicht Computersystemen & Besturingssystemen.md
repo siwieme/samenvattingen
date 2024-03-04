@@ -71,6 +71,7 @@ Andere foto's op slides
 * Symmetrische multiprocessing
 * Modulair ontwerp 
     * Microkernelarchitectuur
+       * Kernel kan niet verwijderd worden, heeft een vaste positie
     * Objectgeoriënteerd ontwerp
     * Gedistribueerde omgeving
 
