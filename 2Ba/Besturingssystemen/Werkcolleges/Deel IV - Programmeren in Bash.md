@@ -152,5 +152,73 @@ int main() {
     * `/dev/null`: een speciaal bestand dat alle geschreven data negeert
 * Commando `cat /dev/null`: toont niets, want `/dev/null` bevat geen data
 
+* Commando `exec 3> bestand`: opent bestand voor schrijven naar bestandsdescriptornummer 3
+    * `echo "Hallo" >&3`: schrijft "Hallo" naar bestand
+    * `exec 3>&-`: sluit bestand
 
+* Commando `strace 2>&1 ls -l | less`: toont de systeemaanroepen van het commando `ls -l` in `less`
+    * `2>&1`: stderr wordt omgeleid naar stdout (zorgt ervoor dat ongebufferde uitvoer gebufferd wordt)
+    * `|`: pipe
+    * 2 processen:
+        * `strace 2>&1 ls -l`: stderr wordt omgeleid naar stdout
+        * `less`: toont de uitvoer van `strace 2>&1 ls -l`
+        * Gescheiden door pipe
 
+* Commando `du /etc > tmp.txt 2>&1`: schrijft de grootte van bestanden in `/etc` naar `tmp.txt`
+    * `du /etc`: toont de grootte van bestanden in `/etc`
+        * 1 -> stdout (buffered) (scherm)
+        * 2 -> stderr (unbuffered) (scherm)
+    * `> tmp.txt`: schrijft naar `tmp.txt`
+    * `2>&1`: stderr wordt omgeleid naar stdout (zorgt ervoor dat ongebufferde uitvoer gebufferd wordt)
+
+* Commando `du /etc 2>&1 1 > tmp.txt`:
+    * `du /etc`: toont de grootte van bestanden in `/etc`
+        * 1 -> stdout (buffered) (console)
+        * 2 -> stderr (unbuffered) (console)
+    * `2>&1`: stderr wordt omgeleid naar stdout (zorgt ervoor dat ongebufferde uitvoer gebufferd wordt)
+        * 1 -> stdout (console)
+        * 2 -> stdout (buffered) (console) 
+    * `1 > tmp.txt`: schrijft naar `tmp.txt`
+
+* Commando `exec 3> bestand`: creeërt een bestanddescriptornummer 3 voor schrijven naar bestand
+
+* Commando `du /etc; du /var`: toont de grootte van bestanden in `/etc` en `/var`
+    * `;`: sequentiële uitvoering
+
+* Commando `du /etc; du /var > tmp.txt`: toont de grootte van bestanden in `/etc` en schrijft de grootte van bestanden in `/var` naar `tmp.txt`
+    * `;`: sequentiële uitvoering
+    * `>`: schrijft naar `tmp.txt`
+
+* Commando `( du /etc; du /var; ) > tmp.txt`: schrijft de grootte van bestanden in `/etc` en `/var` naar `tmp.txt`
+    * `()`: zorgt er voor dat de commando's binnen de haakjes in een kindproces van de huidige shell uitgevoerd worden
+    * `;`: sequentiële uitvoering
+    * `>`: schrijft naar `tmp.txt`
+
+* Commando `{ du /etc; du /var; } > tmp.txt`: schrijft de grootte van bestanden in `/etc` en `/var` naar `tmp.txt`
+    * `{}`: zorgt er voor dat de commando's binnen de accolades in de huidige shell uitgevoerd worden
+    * `;`: sequentiële uitvoering
+    * `>`: schrijft naar `tmp.txt`
+
+* Commando `exec 10&-`: sluit bestandsdescriptornummer 
+
+## Process substitution
+
+* Foutboodschappen naar het standaarfoutkanaal sturen:
+    * `echo "Foutboodschap" 1>&2`
+    * `echo "Foutboodschap" >&2`
+
+* Het aantal foutmeldingen opvragen bij `du /proc`:
+    * `du /proc 2>&1 > /dev/null | wc -l`
+        * `2>&1`: stderr wordt omgeleid naar stdout (gebufferd)
+        * `> /dev/null`: schrijft naar `/dev/null`
+        * `| wc -l`: telt het aantal regels
+
+* Commando `head -n 3 /etc/passwd | tail -n 1`: toont de derde lijn van `/etc/passwd`
+    * `head -n 3 /etc/passwd`: toont de eerste 3 lijnen van `/etc/passwd`
+    * `tail -n 1`: toont de laatste lijn van de uitvoer van `head -n 3 /etc/passwd`
+
+* Commando `head -n 3 /etc/passwd | tail -n 1 | head -c 3 | tail -c 1`: toont het derde karakter van de derde lijn van `/etc/passwd`
+    * `head -n 3 /etc/passwd`: toont de eerste 3 lijnen van `/etc/passwd`
+    * `tail -n 1`: toont de laatste lijn van de uitvoer van `head -n 3 /etc/passwd`
+    * `head -c 3`: toont de eerste 3 karakters van de uitvoer van `tail -n 1`
+    * `tail -c 1`: toont het laatste karakter van de uitvoer van `head -c 3`
