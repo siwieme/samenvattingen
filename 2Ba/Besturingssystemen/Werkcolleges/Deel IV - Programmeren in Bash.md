@@ -222,3 +222,21 @@ int main() {
     * `tail -n 1`: toont de laatste lijn van de uitvoer van `head -n 3 /etc/passwd`
     * `head -c 3`: toont de eerste 3 karakters van de uitvoer van `tail -n 1`
     * `tail -c 1`: toont het laatste karakter van de uitvoer van `head -c 3`
+
+* Met behulp van de eenvoudige opdracht dos2unix kun je de `<CR><LF>`-sequenties in een bestand dat door een Windowstoepassing is aangemaakt, vervangen door enkele `<LF>`- lijnscheidingstekens, zoals dit op UNIX verwacht wordt. Hoe kun je met behulp van de tr opdracht hetzelfde effect bereiken? Welke zijn de nadelen van deze benadering?
+     * `tr -d '\r' < bestand > bestand2`: vervangt de `<CR>`-sequenties door `<LF>`-lijnscheidingstekens
+     * Niet lezen en schrijven naar hetzelfde bestand
+     * Geen bestandsnaam meegeven als parameter, enkel in- en outputredirectie
+     * Nog even volgen door `mv bestand2 bestand`ba
+
+* Commando `uniq -d bestand`: toont de dubbele regels in bestand
+    * Kijkt dus enkel naar de opeenvolgende regels
+    * Best eerst sorteren met `sort` om alle dubbele regels te vinden
+    * `sort bestand | uniq -d`
+    * `uniq -d < (sort bestand)`
+
+* In het bestand /etc/passwd worden de velden gescheiden door een :-teken. Het eerste veld bevat de gebruikersnaam en het derde veld het gebruikersID, terwijl het vierde veld het nummer van de primaire groep is waartoe de gebruiker behoort. Sorteer het passwd-bestand met behulp van het sort commando, met het nummer van de primaire groep als sleutel. Zorg ervoor dat het sort commando enkel sorteert op het veld met de primaire groep (en niet op het restant van de lijn), en dit veld alfabetisch (niet-numeriek) sorteert. Bij deze sortering moet bijvoorbeeld gelden: 1 < 100 < 12. Geef de volledige commandolijn waarmee je deze opdracht hebt uitgevoerd. Voer dit commando vervolgens uit, waarbij je de uitvoer omleidt naar het bestand ~/passwd. Doe nu hetzelfde met het group-bestand. Dit bestand bevat onder meer als eerste veld de groepsnaam, terwijl het nummer van de groep nu in het derde veld staat. Sorteer opnieuw volgens dezelfde criteria, met het nummer van de groep als sleutel. Leid de uitvoer nu om naar het bestand ~/group.
+    * `sort -t : -k 4,4 /etc/passwd > ~/passwd`
+    * `sort -t : -k 3,3 /etc/group > ~/group`
+    * Wat als het vierde veld gelijk is? Dan sorteren op het eerste veld?
+        * `sort -t : -k4n,4n -k1,1 /etc/passwd > ~/passwd`
