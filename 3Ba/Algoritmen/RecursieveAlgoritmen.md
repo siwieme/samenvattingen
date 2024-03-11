@@ -94,3 +94,86 @@ Gevraagd: het k-de kleinste element (1 ≤ 𝑘 ≤ 𝑛)
 3. Uitvoeringstijd hangt af van waarde van de invoer
 4. Schrijf de uitvoeringtijd als recurrente betrekking
 5. Werk uit tot gesloten uitdrukking
+
+### Gemiddelde geval
+
+* Kies random spilelement: dit element is het *i*-de kleinste element met kans 1/*n*
+* Elke uiteindelijke positie *i* heeft even grote kans 1/*n*
+
+### Interpolerend zoeken
+
+* Zeer gevoelig voor niet-uniforme sleutelverdeling
+* Average case *O(lg lg n)* voor aan- en afwezige sleutel
+* Worst case *O(n)*
+* Enkel bij heel grote tabellen nuttig wegens ingewikkelde berekeningen in herhaling
+
+## Recursieve implementatie
+
+### Signatuur
+
+* Wrapper-functie
+* Pass-by-reference
+* Recursion at arm's length (shortcircuiting)
+    * Controle op basisgeval in het begin van de methode
+    * Controle op basisgeval net voor de recursieve oproep
+        * Door sommigen beschouwd als anti-pattern
+* Recursion at arm's length
+    * Geen antipattern bij véél basisgevallen (typisch: bomen)
+
+### Staartrecursies ("tail recursion") wegwerken
+= recursie met **enkel** een recursieve oproep als returnwaarde
+
+### Tail-call optimization
+
+* Ondersteund door C++ and Scala compilers
+* Niet ondersteund in Cpython interpreter en Java VM
+
+### Omvormen tot staartrecursie
+
+* Werk bottom-up i.p.v. top-down
+* = recursieve implementatie met de recursieve oproep als laatste operatie
+
+# Analyse van Meervoudige Recursie
+
+## Analyse van divide-and-conquer
+
+1. Bepaal invoermaat
+2. Bepaal de basisoperaties
+3. Ga na of uitvoeringstijd afhangt van waarde van de invoer
+4. Schrijf de uitvoeringstijd als recurrente betrekking
+$T(n) = a * T(\frac{n}{b}) + f(n)$
+5. Werk uit tot gesloten uitdrukking met behulp van backwards induction, redeneren op de recursieboom, of het master theorema
+
+## Algemene vorm van de recursieboom
+
+$T(n) = a * T(\frac{n}{b}) + f(n)$
+
+## Master Theorema
+
+![alt text](afbeeldingen/recursieve/image_1.png)
+
+## Principe Master Theorema
+
+![alt text](afbeeldingen/recursieve/image_2.png)
+
+# Divide-and-conquer
+
+## Matrixvermenigvuldiging
+
+* Twee *n* x *n* matrices met elkaar vermenigvuldigen
+    * *n* vermenigvuldigingen x $n²$
+    * *n-1* optellingen x $n²$
+
+## Algoritme van Strassen
+
+* Deel matrix op in *n/2* x *n/2* matrices en pas daarop de formule van Strassen toe
+* Invoermaat: dimensie *n*
+* Kostenmodel: optellingen en vermenigvuldigen van matrices *n* x *n*
+* Stel een recurrente betrekking op voor de uitvoeringstijd
+* Los op met het mastertheorema
+
+## Mergesort
+
+* zie slides
+* Verdeel probleem in deelproblemen tot je een deelprobleem heel eenvoudig kan oplossen
+* Voeg gesorteertde deelrijen samen
