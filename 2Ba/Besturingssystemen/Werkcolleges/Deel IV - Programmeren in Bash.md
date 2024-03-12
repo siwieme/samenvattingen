@@ -240,3 +240,47 @@ int main() {
     * `sort -t : -k 3,3 /etc/group > ~/group`
     * Wat als het vierde veld gelijk is? Dan sorteren op het eerste veld?
         * `sort -t : -k4n,4n -k1,1 /etc/passwd > ~/passwd`
+
+* Commando `cut -d : -f 1,3 /etc/passwd`: toont de eerste en derde velden van `/etc/passwd`
+    * `-d :`: veldseparator is `:`
+    * `-f 1,3`: toont de eerste en derde velden
+
+* Sorteer het /etc/passwd bestand, met behulp van het sort commando. Gebruik als primaire sleutel het vierde veld van het bestand. Zorg ervoor dat je in numerieke volgorde sorteert (12 < 100). Regels met gelijke numerieke waarden voor het vierde veld moeten gesorteerd worden met het vijfde veld als secundaire sleutel, waarbij geen onderscheid mag gemaakt worden tussen hoofdletters en kleine letters, en voor de sorteervolgorde nu de omgekeerd alfabetische volgorde moet genomen worden. Geef de volledige commandolijn waarmee je deze opdracht hebt uitgevoerd
+    * `sort -t : -k 4,4n -k 5,5fr /etc/passwd`
+
+* Commando `find`: 
+    * `find <map> -name <patroon>`: zoekt bestanden in een map met een bepaald patroon
+    * `find` : toont alle bestanden in de huidige map
+    * Attribuut `-type`:
+        * `f`: gewoon bestand
+        * `d`: map
+        * `l`: symbolische link
+    * Zoek alle bestanden in een map die beginnen met "pass":
+        * `find /etc -type f -name "pass*"`
+    * Attribuut `printf`:
+        * `%p`: volledig pad
+        * `%y`: bestandstype
+        * `%s`: bestandsgrootte
+        * `%Tc`: datum van laatste wijziging
+    
+* Geef alle bestanden in /usr die groter zijn dan 1MB, sorteer ze numeriek op grootte en toon enkel de naam van het bestand:
+    * `find /usr -type f -size +1M -printf "%s %p\n" | sort -t " " -k1,1n | cut -d " " -f2`
+        * `find /usr -type f -size +1M -printf "%s %p\n"` : toont alle bestanden in /usr die groter zijn dan 1MB
+        * `sort -t " " -k1,1n`: sorteert de bestanden numeriek op grootte
+        * `cut -d " " -f2`: toont enkel de naam van het bestand
+        * Alles doorpipen
+
+* Gebruik het find-commando om een lijst te bekomen van alle bestanden in je persoonlijke map, die gedurende de laatste twee weken gewijzigd werden. Bij het uitprinten (één lijn per bestand) moet je het volledig pad van de gevonden bestanden laten voorafgaan door het tijdstip van de laatste wijziging. Geef de volledige commandolijn waarmee je deze opdracht hebt uitgevoerd. Let er ook op dat je enkel bestanden in de lijst opneemt en geen directory's.
+    * `find ~ -type f -mtime -$((14*24)) -printf "%Tc %p\n"`
+    * `find ~ -type f -mtime -$((14*24)) -printf "%t %p\n"`
+    * Voor werwerking: `find ~ -type f -mtime -$((14*24)) -printf "%t:%p\n"`
+
+*  Gebruik het find-commando om een lijst te bekomen van alle subdirectory's van /usr waarin zich C- of C++-headerbestanden (bestanden met suffix .h) bevinden. Gebruik een commandolijn van de gedaante Gebruik het find-commando om een lijst te bekomen van alle subdirectory's van /usr waarin zich C- of C++-headerbestanden (bestanden met suffix .h) bevinden. Gebruik een commandolijn van de gedaante "find ... | sort | uniq"
+    * `find /usr -type f -name "*.h" -printf "%h\n" | sort | uniq -d`
+        * `find /usr -type f -name "*.h" -printf "%h\n"`: toont alle subdirectory's van /usr waarin zich C- of C++-headerbestanden bevinden
+        * `sort`: sorteert de uitvoer
+        * `uniq -d`: toont enkel de dubbele regels
+    * Indien we het toch met een andere commando willen doen:
+        * `find /usr -type f -name "*.h" -exec ls -l {} \;`
+
+* Commando `find /etc -name "pass*" -exec ln -s {} \;`: maakt een symbolische link naar alle bestanden in /etc die beginnen met "pass"
