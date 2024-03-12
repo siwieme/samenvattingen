@@ -284,3 +284,29 @@ int main() {
         * `find /usr -type f -name "*.h" -exec ls -l {} \;`
 
 * Commando `find /etc -name "pass*" -exec ln -s {} \;`: maakt een symbolische link naar alle bestanden in /etc die beginnen met "pass"
+
+## Shellvariabelen
+
+* Definieer een eigen variabele
+    * `variabele=waarde`
+    * `echo $variabele`: toont de waarde van variabele
+    * `echo ${variabele}`: toont de waarde van variabele
+    * `echo $(variabele)`: toont de waarde van variabele in een subshell (dus niets want variabele is uniek voor de huidige shell)
+* Voorbeeld
+    * `een=M7`
+    * `twee="een"`
+    * `echo $een`: toont "M7"
+    * `echo $twee`: toont "een"
+    * `echo ${!een}`: toont "M7"
+    * `echo ${!twee}`: toont "M7"
+    * `eval echo \$$twee`: toont "M7" (evalueert eerst de waarde van $twee, en dan de waarde van $een, oude versie van shell)
+
+*  Bekijk de inhoud van de shellvariabelen PS1, PS2, SHLVL, RANDOM, SECONDS en PWD, en zoek de betekenis ervan op in info bash of man bash, sectie Shell Variables. Vraag de inhoud van deze variabelen eerst interactief op (met echo) en schrijf vervolgens een script om de inhoud van deze variabelen op het scherm te tonen. Kan je de verschillen verklaren?
+    * `echo $PS1`: toont de waarde van PS1
+    * `echo $PS2`: toont de waarde van PS2
+    * `echo $SHLVL`: toont de waarde van SHLVL
+    * `echo $RANDOM`: toont de waarde van RANDOM
+    * `echo $SECONDS`: toont de waarde van SECONDS
+    * `echo $PWD`: toont de waarde van PWD
+    * `echo $PS1 $PS2 $SHLVL $RANDOM $SECONDS $PWD`: toont de waarde van PS1, PS2, SHLVL, RANDOM, SECONDS en PWD
+    * `echo $PS1; echo $PS2; echo $SHLVL; echo $RANDOM; echo $SECONDS; echo $PWD`: toont de waarde van PS1, PS2, SHLVL, RANDOM, SECONDS en PWD elk op een nieuwe lijn
