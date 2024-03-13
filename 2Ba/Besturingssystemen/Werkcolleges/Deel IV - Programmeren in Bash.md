@@ -310,3 +310,21 @@ int main() {
     * `echo $PWD`: toont de waarde van PWD
     * `echo $PS1 $PS2 $SHLVL $RANDOM $SECONDS $PWD`: toont de waarde van PS1, PS2, SHLVL, RANDOM, SECONDS en PWD
     * `echo $PS1; echo $PS2; echo $SHLVL; echo $RANDOM; echo $SECONDS; echo $PWD`: toont de waarde van PS1, PS2, SHLVL, RANDOM, SECONDS en PWD elk op een nieuwe lijn
+
+* Hoe commentaar toevoegen in een script:
+    * `#`: commentaar op één lijn
+    * `: << COMMENT`: commentaar op meerdere lijnen tot aan `COMMENT`
+
+*  Hoe kun je de variabele PATH zodanig wijzigen dat je bij het aanroepen van een shellscript (dat zich in de actieve directory bevindt), niet steeds naar de actieve directory moet verwijzen? Zorg ervoor dat je oplossing werkt in eender welke directory. Het script moet dus steeds gezocht worden in de werkdirectory, zonder telkens de waarde van PATH aan te passen.
+    * `export PATH=$PATH:.`
+    * `export PATH=$PATH:$(pwd)`
+
+* Hoe kun je ervoor zorgen dat wanneer bij de cd-opdracht een relatieve padnaam (dus niet beginnend met /) als argument opgegeven wordt, niet alleen de huidige werkdirectory als prefix uitgeprobeerd wordt, maar ook een aantal vaste directory's?
+    * `export CDPATH=.:$HOME:/usr/local`
+
+* Hoe kun je met eenzelfde opdracht regelmatig heen en terug schakelen tussen twee mappen als actieve directory?
+    * `cd -`
+
+* Je kunt met het commando read tegelijkertijd meerdere variabelen inlezen via het standaard invoerkanaal. Test dit uit met: read a b c d. Kan je dit aanpassen zodat de gegevens uit een bestand gelezen worden? Probeer dit ook eens met een script op te lossen, en merk op dat de variabelen enkel in het script bestaan!
+    * `read a b c d < bestand`
+    * `read a b c d < <(cat bestand)`
