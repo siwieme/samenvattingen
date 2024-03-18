@@ -177,3 +177,43 @@ $T(n) = a * T(\frac{n}{b}) + f(n)$
 * zie slides
 * Verdeel probleem in deelproblemen tot je een deelprobleem heel eenvoudig kan oplossen
 * Voeg gesorteertde deelrijen samen
+
+## Quicksort
+
+* Partitioneer met methode van Hoare
+* Zie slides voor de rest
+
+# Transform-and-conquer
+
+* Recursie (los probleem op door deelproblemen op te lossen)
+  * Decrease-and-conquer
+  * Divide-and-conquer
+  * Dynamisch programmeren
+* Transform-and-conquer (los probleem op door probleem om te vormen)
+  * Zet de invoer in een handigere vorm
+  * Stel de invoer op een andere manier voor
+  * Vorm het probleem om naar een ander probleem
+
+* Vorm de instantie om
+  * Zoeken in ongesorteerde data: binair zoeken in gesorteerde data
+  * Zoeken in ongebalanceerde boom: zoeken in gebalanceerde boom
+* Sla de gegevens op in andere gegevensstructuur
+
+## Heapsort
+
+* Eigenschappen
+  * Compleet binair boom
+  * Elke ouder is groter dan zijn kinderen
+  * Hoogte van de boom is *O(lg n)*
+  * Invoermaat: aantal elementen *n*
+  * Basisoperatie: verwisselen van twee elementen
+  * Uitvoeringstijd: *O(n lg n)*
+  * In-place sorteren
+  * Niet-stabiel sorteren
+  * Geen recursie
+* Algemeen
+  * Bouw een heap van de invoer
+  * Verwijder de wortel van de heap en plaats deze achteraan in de uitvoer
+  * Herstel de heap-eigenschap
+  * Herhaal tot de heap leeg is
+  
