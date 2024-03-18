@@ -217,3 +217,17 @@ $T(n) = a * T(\frac{n}{b}) + f(n)$
   * Herstel de heap-eigenschap
   * Herhaal tot de heap leeg is
   
+# Uitruil Geheugen - Uitvoeringstijd
+
+## Sleutelvergelijkingen in een volle binairboom
+
+* Structureer de sleutelvergelijkingen in een volle binairboom
+  * Inwendige knopen: 1 sleutelvergelijking
+  * Uitwendige knopen: gerangschikt eindresultaat
+  * n! mogelijke permutaties: n! bladeren
+
+## Ondergrens voor slechtste geval
+
+* = langst mogelijke pad in de boom
+* = hoogte van de boom
+* n! bladeren: h = n lg n
