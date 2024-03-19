@@ -328,3 +328,10 @@ int main() {
 * Je kunt met het commando read tegelijkertijd meerdere variabelen inlezen via het standaard invoerkanaal. Test dit uit met: read a b c d. Kan je dit aanpassen zodat de gegevens uit een bestand gelezen worden? Probeer dit ook eens met een script op te lossen, en merk op dat de variabelen enkel in het script bestaan!
     * `read a b c d < bestand`
     * `read a b c d < <(cat bestand)`
+
+* Inputstreamseperator veranderen:
+    * `IFS=:`: verandert de inputstreamseperator naar `:`
+    * `read a b c d`: leest de eerste 4 velden van een lijn in, gescheiden door `:`
+
+* Waarom werkt `. ls` niet?
+  * Er is geen kindproces
