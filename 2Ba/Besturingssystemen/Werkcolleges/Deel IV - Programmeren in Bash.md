@@ -335,3 +335,6 @@ int main() {
 
 * Waarom werkt `. ls` niet?
   * Er is geen kindproces
+
+* Hoe een newline opslaan in een variabele?
+  * `var=$'\n'`
