@@ -1,2 +1,2 @@
 * Zoek naar alle bestanden in de map /etc/ die beginnen met "pass" en zorg ervoor dat in de huidige werkdirectory een symbolische link hiernaar aangemaakt wordt met dezelfde naam die wijst naar de gevonden bestanden:
-  * `find /etc -type f -name "pass*" -exec ln -s {} \;`
+  * `find /etc -type f -name "pass*" -exec ln -s {} \; 2>/dev/null`
