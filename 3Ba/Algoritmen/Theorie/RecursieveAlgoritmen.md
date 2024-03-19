@@ -231,3 +231,22 @@ $T(n) = a * T(\frac{n}{b}) + f(n)$
 * = langst mogelijke pad in de boom
 * = hoogte van de boom
 * n! bladeren: h = n lg n
+
+## Counting sort
+
+### Algoritme (eknel voor *gehele* getallen)
+
+* Alle gegevens zijn gehele getallen
+* Min. en max. waarde van de gegevens zijn gekend
+  * Indien niet: eerst minimum en maximum bepalen
+* Basisprincipe
+  * Positie van een sleutel is gekend als aantal sleutels kleiner dan de sleutel gekend is
+  * Te verfijnen bij duplicaten
+
+## Bucket sort
+
+* Algemeen
+  * Verdeel de invoer in *n* gelijke delen
+  * Sorteer de deelrijen
+  * Voeg de deelrijen samen
+
