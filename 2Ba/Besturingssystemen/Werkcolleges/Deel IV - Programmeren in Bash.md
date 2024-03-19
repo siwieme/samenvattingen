@@ -338,3 +338,51 @@ int main() {
 
 * Hoe een newline opslaan in een variabele?
   * `var=$'\n'`
+
+* Overzicht haakjes
+  * ${ } : variabele substitution
+  * $( ) : command substitution
+  * $(( )) : arithmetic substitution
+
+```bash
+#!/bin/bash
+
+echo '$1' is $1 en '13' is ${13}
+
+echo We hebben $# aantal argumenten en de volledige lijst met argumenten is "$@"
+```
+* Om argumenten meegeven, als script argumenten.sh heet: `bash argumenten.sh {1..20}`
+
+* Twee scripts in bash en c
+    * c: 
+    * ```c
+        #include <stdio.h>
+
+        int main() {
+            int getal;
+            scanf("%d",&getal);
+            int faculteit=getal;
+            getal--;
+            while(getal>0) {
+                faculteit*=getal;
+                getal--;
+            }
+            printf("%d\n",faculteit);
+            return 0;
+        }```
+    * bash:
+    * ```bash
+        #!/bin/bash
+
+        read -p "Give me a number " getal
+
+        faculteit=$getal
+
+        ((getal--))
+
+        while ((getal>0));do
+            faculteit=$((faculteit*getal))
+            ((getal--))
+        done
+
+        printf "De faculteit is %d"  $faculteit```
