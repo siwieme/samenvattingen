@@ -386,3 +386,22 @@ echo We hebben $# aantal argumenten en de volledige lijst met argumenten is "$@"
         done
 
         printf "De faculteit is %d"  $faculteit```
+
+
+## Parameter expansion
+
+* Getallen vergelijken: (())
+* Strings vergelijken: [[]]
+
+## Arrays
+
+* Meest eenvoudige vorm om eentje aan te maken: `array=( 7 hallo 19 )`
+    * 7 = index 0
+    * hallo = index 1
+    * 19 = index 2
+* Echo van een array zijn elementen: `echo ${array[@]}`
+* Echo van een array zijn lengte: `echo ${#array[@]}`
+* Echo van een array zijn indexen: `echo ${!array[@]}`
+* Echo van een element: `echo ${array[1]}`
+
+* Oefening 94 was een oud-examenvraag
