@@ -2,7 +2,6 @@
 
 read n naam < <(wc -l $1)
 
-echo $n
 
 index=$((n-$2))
 teller=0
