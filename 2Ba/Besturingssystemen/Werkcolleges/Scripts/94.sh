@@ -3,8 +3,8 @@
 declare -A array
 
 while read lijn ; do
-    if [[ "$lijn" =~ ^Pinging ]]; then
-        read a comp rest <<< "$lijn"
+    if [[ "$lijn" =~ ^C ]]; then
+        read a b c comp <<< "$lijn"
         array[$comp]=1	
     fi
     if [[ "$lijn" =~ ^Reply ]]; then
