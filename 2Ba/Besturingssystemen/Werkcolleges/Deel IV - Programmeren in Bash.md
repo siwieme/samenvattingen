@@ -405,3 +405,5 @@ echo We hebben $# aantal argumenten en de volledige lijst met argumenten is "$@"
 * Echo van een element: `echo ${array[1]}`
 
 * Oefening 94 was een oud-examenvraag
+
+* Vraag 98 & 99 thuis maken
